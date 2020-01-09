@@ -83,8 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
             ccToggle.setAttribute("src", "/assets/icon128.png");
         }
     });
-<<<<<<< Updated upstream
-=======
     /*
     partyInput = document.getElementById("partyLink");
     partyInput.addEventListener("change", function() {
@@ -101,5 +99,4 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     */
->>>>>>> Stashed changes
 });

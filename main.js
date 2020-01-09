@@ -139,7 +139,7 @@ function getPresence() {
                 if (game["play"] === tabURL) {
                     detailDisplay = "Playing " + gameName;
                     largeImgTxt = gameName;
-                    smallImgTxt = "Google Chrome through Stadia"
+                    smallImgTxt = "On Stadia through Chrome"
                     if (game["hasIcon"]) {
                         largeImg = game["aliases"][0];
                         smallImg = "chrome";
