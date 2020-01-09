@@ -69,7 +69,6 @@ function getPresence() {
             
             if (ccOn) {
                 let currentlyPlaying = document.getElementsByClassName("HDKZKb  LiQ6Hb");
-                console.log(currentlyPlaying);
                 
                 if (currentlyPlaying === undefined) {
                     return {'action': 'disconnect'}
