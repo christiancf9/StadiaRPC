@@ -83,4 +83,23 @@ document.addEventListener('DOMContentLoaded', function () {
             ccToggle.setAttribute("src", "/assets/icon128.png");
         }
     });
+<<<<<<< Updated upstream
+=======
+    /*
+    partyInput = document.getElementById("partyLink");
+    partyInput.addEventListener("change", function() {
+        if (partyInput.value.slice(0, 45) === "https://stadia.google.com/links?party_invite=") {
+            chrome.tabs.query({url: "https://stadia.google.com/*"}, function(results) {
+                if (results.length === 0) {
+                    chrome.tabs.create({url: 'https://stadia.google.com/'});
+                }
+
+                results.forEach(tab => {
+                    chrome.tabs.sendMessage(tab.id, {action: "passToken", partyToken: partyInput.value.slice(45)});
+                });
+            });
+        }
+    });
+    */
+>>>>>>> Stashed changes
 });

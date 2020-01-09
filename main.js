@@ -13,8 +13,23 @@ chrome.runtime.sendMessage(extensionId, { mode: 'active' }, function (response) 
 
 //Wait for presence Requests
 chrome.runtime.onMessage.addListener(function (info, sender, sendResponse) {
+<<<<<<< Updated upstream
     console.log('Presence requested', info);
     sendResponse(getPresence());
+=======
+    if (info.action === "passToken") {
+        partyToken = info.partyToken;
+        console.log("Recieved Token" + partyToken);
+    } else if (info.action === "joinRequest") {
+        if (confirm(info.user.username + '#' + info.user.discriminator + ' wants to join you')) {
+            sendResponse('YES');
+        } else {
+            sendResponse('NO');
+        }
+    } else {
+        sendResponse(getPresence());
+    }
+>>>>>>> Stashed changes
 });
 
 //Establish all options
@@ -35,6 +50,7 @@ let homeOn = true;
 let storeOn = true;
 let gameOn = true;
 let ccOn = false;
+let settingsRetrieved = false
 
 //Return presence   
 function getPresence() {
@@ -46,6 +62,7 @@ function getPresence() {
             storeOn = items.rpcStoreOn;
             gameOn = items.rpcGameOn;
             ccOn = items.rpcCCOn;
+            settingsRetrieved = true;
         });
 
         //Updates the options
@@ -56,9 +73,17 @@ function getPresence() {
             smallImg = "online";
             
             if (ccOn) {
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                 let currentlyPlaying = document.getElementsByClassName("HDKZKb  LiQ6Hb");
                 console.log(currentlyPlaying);
                 
+                if (currentlyPlaying === undefined) {
+                    return {'action': 'disconnect'}
+                }
+
                 for (let i = 0; i < currentlyPlaying.length; i++) {
                     if (!currentlyPlaying[i].getAttribute("class").includes("FW3qke")) {
                         currentlyPlaying = currentlyPlaying[i].textContent;
@@ -71,7 +96,11 @@ function getPresence() {
                     smallImgTxt = "on Stadia"
 
                     //Slice to just game name then make lowercase and remove special characters
+<<<<<<< Updated upstream
                     currentlyPlaying = currentlyPlaying.slice(8).toLowerCase().replace(/[^a-zA-Z]/g, "");
+=======
+                    currentlyPlaying = currentlyPlaying.slice(8).toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(" ", "");
+>>>>>>> Stashed changes
                     
                     Object.keys(games).forEach(gameName => {
                         let game = games[gameName];
@@ -157,6 +186,63 @@ function getPresence() {
                 }
             }
         }
+<<<<<<< Updated upstream
+=======
+        
+        /*
+        if (partyToken.length > 0) {
+            console.log({   
+                clientId: '648430151390199818',
+                presence: {
+                    details: detailDisplay,
+                    state: stateDisplay,
+                    startTimestamp: time,
+                    instance: true,
+                    largeImageKey: largeImg,
+                    smallImageKey: smallImg,
+                    largeImageText: largeImgTxt,
+                    smallImageText: smallImgTxt,
+                    partyId: "party:" + partyToken,
+                    partySize: document.getElementsByClassName("z9e9Hc")[0],
+                    partyMax: 6,
+                    joinSecret: partyToken
+                }
+            })
+
+            return {   
+                clientId: '648430151390199818',
+                presence: {
+                    details: detailDisplay,
+                    state: stateDisplay,
+                    startTimestamp: time,
+                    instance: true,
+                    largeImageKey: largeImg,
+                    smallImageKey: smallImg,
+                    largeImageText: largeImgTxt,
+                    smallImageText: smallImgTxt,
+                    partyId: "party:" + partyToken,
+                    partySize: document.getElementsByClassName("z9e9Hc")[0],
+                    partyMax: 6,
+                    joinSecret: partyToken
+                }
+            }; 
+        }
+        */
+
+        console.log("Presence", {
+            clientId: '648430151390199818',
+            presence: {
+                details: detailDisplay,
+                state: stateDisplay,
+                startTimestamp: time,
+                instance: true,
+                largeImageKey: largeImg,
+                smallImageKey: smallImg,
+                largeImageText: largeImgTxt,
+                smallImageText: smallImgTxt
+            }
+        });
+>>>>>>> Stashed changes
 
         return {
             clientId: '648430151390199818',
@@ -172,6 +258,7 @@ function getPresence() {
             }
         };
     } catch (e) {
+        console.log("[StadiaRPC] [ERROR] URL:", tabURL, ", detailDisplay:", detailDisplay, ", homeOn:", homeOn, ", storeOn:", storeOn, ", gameOn:", gameOn, ", ccOn:", ccOn, ", settingsRetrieved:", settingsRetrieved);
         console.error(e);
     }
 }
